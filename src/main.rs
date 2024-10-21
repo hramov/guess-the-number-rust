@@ -4,14 +4,10 @@ mod ioutil;
 fn main() {
     println!("Welcome to the Guess the number game!");
     println!("Please, enter the maximum number: ");
-    let max_number = ioutil::get_user_string()
-        .parse::<i32>()
-        .expect("Please type a number!");
+    let max_number = ioutil::get_user_number();
 
     println!("Please, enter the maximum number of attempts: ");
-    let max_attempts = ioutil::get_user_string()
-        .parse::<i32>()
-        .expect("Please type a number!");
+    let max_attempts = ioutil::get_user_number();
 
     let mut game = game::new_game();
     game.start(max_number, max_attempts);
@@ -19,9 +15,7 @@ fn main() {
 
     loop {
         println!("Please input your guess.");
-        let input = ioutil::get_user_string()
-            .parse::<i32>()
-            .expect("Please type a number!");
+        let input = ioutil::get_user_number();
 
         let guess = game.guess(input);
 
@@ -48,6 +42,7 @@ fn main() {
 
     let (number, attempts) = game.stat();
 
+    println!("===========");
     println!("The secret number was: {}", number);
     println!("You guessed {} times", attempts);
 }
